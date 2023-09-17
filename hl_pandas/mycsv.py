@@ -142,7 +142,7 @@ def rename_csv(csv_file, success=True):
     os.rename(csv_file, new_filename)
 
 
-isCode(my_file)
-print(isAll(my_file, get_config_column(config_file)))
-insert_csv(my_file, config_file)
-# rename_csv(my_file, success=True)
+# isCode(my_file)
+# print(isAll(my_file, get_config_column(config_file)))
+# insert_csv(my_file, config_file)
+rename_csv(my_file, success=True)
