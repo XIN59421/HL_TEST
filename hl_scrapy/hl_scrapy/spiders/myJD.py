@@ -1,3 +1,4 @@
+import html
 import re
 import time
 
@@ -6,7 +7,7 @@ from scrapy import Selector
 from scrapy.http import Request
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from bs4 import BeautifulSoup
 from ..items import HlScrapyItem
 
 
@@ -34,9 +35,12 @@ class JDSpider(scrapy.Spider):
     def parse(self, response):
         sel = Selector(response)
         list_item = sel.css('#J_goodsList > ul > li')
+
         for i in list_item:
             JD_item = HlScrapyItem()
-            JD_item['imgLink'] = i.css('div.p-img img::attr(src)').extract_first()
+
+            JD_item['imgLink'] = i.css(f'.p-img img').extract_first()
+
             JD_item['title'] = i.css('div.p-name em::text').extract_first()
             JD_item['price'] = i.css('.p-price strong i').extract_first()
             JD_item['color'] = i.css('ul.ps-main li.ps-item a::attr(title)').extract_first()
